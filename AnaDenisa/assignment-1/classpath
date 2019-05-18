@@ -1,0 +1,10 @@
+#!/bin/bash
+
+(
+  # Go to the directory where the script is defined.
+  cd "$(dirname "$0")"
+  # Find all the jar files in the shared directory.
+  find "${PWD}/../../shared/" -name "*.jar"
+  # Includes the 'classes' subdirectory as well.
+  echo "${PWD}/classes"
+)| tr $'\n' ':'  # Join each line into a colon-separated list.
