@@ -1,11 +1,10 @@
 import java.util.HashMap;
 import java.util.Map;
 
-final class Anagrams {
+final class AnagramCheckUtil {
 
   public static boolean checkAnagrams(String s1, String s2) {
     Map<Character, Integer> map = new HashMap<>();
-    int len;
 
     /* anagram strings have to be of the same length */
     if (s1.length() != s2.length()) return false;
@@ -19,23 +18,25 @@ final class Anagrams {
     if (s1.equals(s2)) return true;
 
     /* compute the length of the strings just once */
-    len = s1.length();
+    int len = s1.length();
 
+    /* register in map the number of aparitions of the charcater c that far */
     for (int i = 0; i < len; i++) {
       char c = s1.charAt(i);
 
       if (map.containsKey(c)) {
-        /* get the number of aparitions of the charcater c that far */
         int val = map.get(c);
-
-        /* increment and update the number of occurances of c in map */
         map.put(c, val + 1);
       } else {
-        /* first occurance of c in map */
         map.put(c, 1);
       }
     }
 
+    /*
+     * for each occurance of each character in s2, decrement the number
+     * of apparitions of that character previously registered in map after
+     * the iteration through s1
+     */
     for (int i = 0; i < len; i++) {
       char c = s2.charAt(i);
 
